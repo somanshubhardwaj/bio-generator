@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { BorderBeam } from "../magicui/border-beam";
 import { BioContext } from "@/context/BioContent";
 import { Skeleton } from "../ui/skeleton";
+import Coplylabel from "./Coplylabel";
 
 const Output = () => {
   const { output, loading } = useContext(BioContext);
@@ -31,6 +32,9 @@ const Output = () => {
                 className="w-full text-base border-primary/20 rounded-md p-4 relative bg-background"
               >
                 {data.bio || "No bio generated"}
+                <span className="absolute top-[99%] right-0">
+                  <Coplylabel text={data.bio} />
+                </span>
               </li>
             );
           })}

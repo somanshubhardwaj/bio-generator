@@ -10,7 +10,10 @@ export default function Home() {
   return (
     <main className="relative grid grid-cols-2 gap-12 p-24">
       <div className="flex w-full flex-col items-center justify-center space-y-4  text-center col-span-full">
-        <Link href="/Git" className="mb-4 group ">
+        <Link
+          href="https://github.com/somanshubhardwaj/bio-generator"
+          className="mb-4 group "
+        >
           <AnimatedGradientText className="px-6 py-2 rounded-full">
             <Star className="h-6 w-6 fill-yellow-300 text-yellow-400" />
             <hr className="mx-2 h-4 w-[0.25px] bg-gray-300" />

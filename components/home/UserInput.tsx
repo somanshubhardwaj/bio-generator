@@ -28,6 +28,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Info, InfoIcon } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { Switch } from "../ui/switch";
+import { generateBio } from "@/app/actions";
 
 const formSchema = z.object({
   model: z.string().min(1, "Model is required").max(100),
@@ -51,7 +52,7 @@ const UserInput = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      model: "llama3-8b-8198",
+      model: "",
       temperature: 1,
       content: "",
       type: "Personal",
@@ -59,8 +60,24 @@ const UserInput = () => {
       emojis: false,
     },
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    const userInput = ` user input: ${values.content},
+    Bio type: ${values.type},
+    Bio Tone: ${values.tone},
+    Add Emojis: ${values.emojis},
+    
+    `;
+    try {
+      const { data } = await generateBio(
+        userInput,
+        values.temperature,
+        values.model
+      );
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="relative flex flex-col items-start gap-8">
@@ -79,7 +96,10 @@ const UserInput = () => {
                   <FormItem>
                     <FormLabel>Model</FormLabel>
                     <FormControl>
-                      <Select>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
                         <SelectTrigger className="">
                           <SelectValue placeholder="Select a model" />
                         </SelectTrigger>
@@ -129,7 +149,7 @@ const UserInput = () => {
                         min={0}
                         max={2}
                         step={0.1}
-                        onValueChange={(val) => field.onChange(val)}
+                        onValueChange={(val) => field.onChange(val[0])}
                       />
                     </FormControl>
                     <FormMessage />
@@ -167,7 +187,10 @@ const UserInput = () => {
                   <FormItem>
                     <FormLabel>Type</FormLabel>
                     <FormControl>
-                      <Select>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
                         <SelectTrigger className="">
                           <SelectValue placeholder="Select a type" />
                         </SelectTrigger>
@@ -188,7 +211,10 @@ const UserInput = () => {
                   <FormItem>
                     <FormLabel>Tone</FormLabel>
                     <FormControl>
-                      <Select>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
                         <SelectTrigger className="">
                           <SelectValue placeholder="Select a tone" />
                         </SelectTrigger>

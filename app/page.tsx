@@ -1,6 +1,7 @@
 import Output from "@/components/home/Output";
 import UserInput from "@/components/home/UserInput";
 import AnimatedGradientText from "@/components/magicui/animated-gradient-text";
+import { BioProvider } from "@/context/BioContent";
 import { ChevronRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,8 +27,10 @@ export default function Home() {
           that helps you generate a bio for your social media accounts.
         </p>
       </div>
-      <UserInput />
-      <Output />
+      <BioProvider>
+        <UserInput />
+        <Output />
+      </BioProvider>
     </main>
   );
 }

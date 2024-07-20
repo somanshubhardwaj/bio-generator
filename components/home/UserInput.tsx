@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,10 +25,11 @@ import { LogosMetaIcon } from "../icons/Meta";
 import { LogosMistralAiIcon } from "../icons/Mistral";
 import { Slider } from "../ui/slider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Info, InfoIcon } from "lucide-react";
+import { Info, InfoIcon, Loader2Icon } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { Switch } from "../ui/switch";
 import { generateBio } from "@/app/actions";
+import { BioContext } from "@/context/BioContent";
 
 const formSchema = z.object({
   model: z.string().min(1, "Model is required").max(100),
@@ -49,6 +50,7 @@ const formSchema = z.object({
   emojis: z.boolean(),
 });
 const UserInput = () => {
+  const { setLoading, setOutput, output, loading } = useContext(BioContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -61,6 +63,7 @@ const UserInput = () => {
     },
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
     console.log(values);
     const userInput = ` user input: ${values.content},
     Bio type: ${values.type},
@@ -74,9 +77,11 @@ const UserInput = () => {
         values.temperature,
         values.model
       );
-      console.log(data);
+      setOutput(data);
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false);
     }
   };
   return (
@@ -256,7 +261,9 @@ const UserInput = () => {
             </div>
           </fieldset>
           <div className="grid gap-3">
-            <Button type="submit">Generate</Button>
+            <Button type="submit" disabled={loading} >
+              {loading && <Loader2Icon className="animate-spin w-4 h-4 mr-2" />}
+              Generate</Button>
           </div>
         </form>
       </Form>

@@ -8,6 +8,7 @@ import Link from "next/link";
 
 export default function Home() {
   //TODO: make responsive
+  //TODO: add meta data
   return (
     <main className="relative grid grid-cols-2 gap-12 p-24">
       <div className="flex w-full flex-col items-center justify-center space-y-4  text-center col-span-full">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import GridPattern from "@/components/magicui/grid-pattern";
@@ -21,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(GeistSans.variable, "font-sans")}>
         <GridPattern width={60} height={60} className="-z-10 opacity-70  " />
-        <TooltipProvider>{children}</TooltipProvider>
+        <TooltipProvider>
+          {children}
+          <Analytics />
+        </TooltipProvider>
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ export default function Home() {
   //TODO: make responsive
   //TODO: add meta data
   return (
-    <main className="relative grid grid-cols-2 gap-12 p-24">
+    <main className="relative grid grid-cols-2 gap-2 md:gap-4 lg:gap-12 p-6 md:p-8 lg:p-24">
       <div className="flex w-full flex-col items-center justify-center space-y-4  text-center col-span-full">
         <Link
           href="https://github.com/somanshubhardwaj/bio-generator"
@@ -23,10 +23,10 @@ export default function Home() {
             <ChevronRight className="size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5  ml-1 " />
           </AnimatedGradientText>
         </Link>
-        <h1 className="font-extrabold lg:w-[90%] uppercase text-7xl text-center  w-full mx-auto pt-4">
-          GENERATE A PERFECT X BIO FOR YOU
+        <h1 className="md:font-extrabold lg:w-[90%] uppercase md:text-5xl lg:text-7xl text-center  w-full mx-auto pt-4 text-4xl font-semibold">
+          GENERATE A PERFECT BIO FOR YOU
         </h1>
-        <p className="text-lg text-slate-900 ">
+        <p className="lg:text-lg text-base text-slate-900 hidden md:inline">
           <span className="font-bold">Bio Gen</span> is a tool that generates a
           perfect bio for you based on your preferences. It is a simple tool
           that helps you generate a bio for your social media accounts.

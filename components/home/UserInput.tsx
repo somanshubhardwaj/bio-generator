@@ -64,7 +64,7 @@ const UserInput = () => {
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values);
+
     const userInput = ` user input: ${values.content},
     Bio type: ${values.type},
     Bio Tone: ${values.tone},
@@ -79,13 +79,12 @@ const UserInput = () => {
       );
       setOutput(data);
     } catch (error) {
-      console.error(error);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
   return (
-    <div className="relative flex flex-col items-start gap-8">
+    <div className="relative flex flex-col items-start gap-8 col-span-full md:col-span-1">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -261,9 +260,10 @@ const UserInput = () => {
             </div>
           </fieldset>
           <div className="grid gap-3">
-            <Button type="submit" disabled={loading} >
+            <Button type="submit" disabled={loading}>
               {loading && <Loader2Icon className="animate-spin w-4 h-4 mr-2" />}
-              Generate</Button>
+              Generate
+            </Button>
           </div>
         </form>
       </Form>

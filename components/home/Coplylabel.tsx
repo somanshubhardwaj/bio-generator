@@ -8,9 +8,7 @@ const Coplylabel = ({ text }: { text: string }) => {
     try {
       await navigator.clipboard.writeText(text);
       setLabel("copied");
-    } catch (error) {
-      console.error("copy failed", error);
-    }
+    } catch (error) {}
   };
   const handleCLick = () => {
     copytoclipboard(text);

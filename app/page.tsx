@@ -15,6 +15,7 @@ export default function Home() {
         <Link
           href="https://github.com/somanshubhardwaj/bio-generator"
           className="mb-4 group "
+          target="_blank"
         >
           <AnimatedGradientText className="px-6 py-2 rounded-full">
             <Star className="h-6 w-6 fill-yellow-300 text-yellow-400" />
